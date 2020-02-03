@@ -12,6 +12,7 @@ title: |-
 summary: |
   Deploy your ipa and apk files to Prototyper.
 description: |
+  Deploy your ipa and apk files to Prototyper.
   Prototyper is an open-source delivery tool which can be used to make your projects directly accessable to your customers.
 website: https://github.com/quickbirdstudios/bitrise-step-deploy-to-prototyper
 source_code_url: https://github.com/quickbirdstudios/bitrise-step-deploy-to-prototyper
@@ -67,50 +68,72 @@ inputs:
   - upload_url: 
     opts:
       title: "Upload URL"
-      summery: Upload URL of your Prototyper Project.
+      summery: "Upload URL of your Prototyper Project."
+      description: |
+        Upload URL of your Prototyper Project.
+        Form: '<i>baseurl</i>:<i>port</i>/apps/<i>appID</i>/releases'
       is_expanded: true
       is_required: true
   - project_type: Beta
     opts:
       title: "Prototyper Release Type"
+      description: |
+        Prototyper Release Type.
+        Only 'Beta' possible currently.
       is_required: true
       value_options: ["Beta"]
   - build_key:
     opts:
       title: "Prototyper Build Key"
-      summery: Key for this build. Is ignored when using git branch name & commit hash.
+      summery: "Key for this build. Is ignored when using git branch name & commit hash."
+      description: |
+        Key for this build. Is ignored when using git branch name & commit hash.
+        Is recommanded to be unique so the build can be identified through this key.
+        Is not required to be unique though.
       is_expanded: true
       is_required: true
-  - git_branch_name:
+  - git_branch_name: $BITRISE_GIT_BRANCH
     opts:
       title: "Git Branch Name"
-      summery: Current git branch name (if provided with git commit hash is used as prototyper build key)
+      summery: "Current git branch name (if provided with git commit hash is used as prototyper build key)"
+      description: |
+        Current git branch name (if provided with git commit hash is used as prototyper build key)
+        Should be accessable through "$BITRISE_GIT_BRANCH"
       is_expanded: true
       is_required: false
-  - git_commit_hash:
+  - git_commit_hash: $BITRISE_GIT_COMMIT
     opts:
       title: "Git Commit Hash"
-      summery: Current git commit hash (if provided with git branch name is used as prototyper build key)
+      summery: "Current git commit hash (if provided with git branch name is used as prototyper build key)"
+      description: |
+        Current git commit hash (if provided with git branch name is used as prototyper build key)
+        Should be accessable through "$BITRISE_GIT_COMMIT"
       is_expanded: true
       is_required: false
   - meta:
     opts:
       title: "Meta Message"
-      summery: Custom Message. E.g. commit hash.
+      summery: "Custom Message. E.g. commit hash."
+      description: |
+        Custom Message. E.g. commit hash.
       is_expanded: true
       is_required: false
   - upload_key:
     opts:
       title: "Prototyper Upload Key"
-      summery: Upload Key which has to be generated in Prototyper.
+      summery: "Upload Key which has to be generated in Prototyper."
+      description: |
+        Upload Key which has to be generated in Prototyper.
+        Can be generated in the Prototyper Settings of the App.
       is_expanded: true
       is_required: true
       is_sensitive: true
   - ipa_path: $BITRISE_IPA_PATH
     opts:
-      title: "IPA path"
-      summary: Path to your file you want to upload to Prototyper.
+      title: "IPA/APK path"
+      summary: "Path to your file you want to upload to Prototyper."
       description: |
+        Path to your file you want to upload to Prototyper.
         Enter the path to the file which should be uploaded to Prototyper.
       is_expanded: true
       is_required: true
