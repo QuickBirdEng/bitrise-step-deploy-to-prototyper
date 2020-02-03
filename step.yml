@@ -1,0 +1,122 @@
+#
+# A couple of useful guides & docs:
+#
+# - Main Bitrise CLI docs: https://github.com/bitrise-io/bitrise/tree/master/_docs
+# - Step Development Guideline: https://github.com/bitrise-io/bitrise/blob/master/_docs/step-development-guideline.md
+# - Bitrise.yml format spec: https://github.com/bitrise-io/bitrise/blob/master/_docs/bitrise-yml-format-spec.md
+# - Bitrise docs: http://devcenter.bitrise.io/
+# - Bitrise CLI guides: http://devcenter.bitrise.io/bitrise-cli/
+
+title: |-
+  Deploy to Prototyper
+summary: |
+  Deploy your ipa and apk files to Prototyper.
+description: |
+  Prototyper is an open-source delivery tool which can be used to make your projects directly accessable to your customers.
+website: https://github.com/quickbirdstudios/bitrise-step-deploy-to-prototyper
+source_code_url: https://github.com/quickbirdstudios/bitrise-step-deploy-to-prototyper
+support_url: https://github.com/quickbirdstudios/bitrise-step-deploy-to-prototyper/issues
+host_os_tags:
+  - osx-10.10
+  - ubuntu-16.04
+
+# If this step should be available only for certain project types
+# just uncomment this `project_type_tags` section and include all the
+# project types supported by the step. If the step can be used for all
+# project types then you can just remove this section.
+# If no `project_type_tags` specified (or specified as an empty array)
+# that means the step can be used for any project type.
+# You can find more information about project type tags in the Step Development Guideline:
+# https://github.com/bitrise-io/bitrise/blob/master/_docs/step-development-guideline.md
+#
+# project_type_tags:
+#   - ios
+#   - macos
+#   - android
+#   - xamarin
+#   - react-native
+#   - cordova
+#   - ionic
+
+# Type tags are used for categorizing steps, for easier step discovery in Step Libraries.
+# You can find more information about type tags in the Step Development Guideline:
+# https://github.com/bitrise-io/bitrise/blob/master/_docs/step-development-guideline.md
+type_tags:
+  - deploy
+
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+
+
+toolkit:
+  go:
+    package_name: github.com/quickbirdstudios/bitrise-step-deploy-to-prototyper
+
+
+inputs:
+  - upload_url: 
+    opts:
+      title: "Upload URL"
+      summery: Upload URL of your Prototyper Project.
+      is_expanded: true
+      is_required: true
+  - project_type: Beta
+    opts:
+      title: "Prototyper Release Type"
+      is_required: true
+      value_options: ["Beta"]
+  - build_key:
+    opts:
+      title: "Prototyper Build Key"
+      summery: Key for this build. Is ignored when using git branch name & commit hash.
+      is_expanded: true
+      is_required: true
+  - git_branch_name:
+    opts:
+      title: "Git Branch Name"
+      summery: Current git branch name (if provided with git commit hash is used as prototyper build key)
+      is_expanded: true
+      is_required: false
+  - git_commit_hash:
+    opts:
+      title: "Git Commit Hash"
+      summery: Current git commit hash (if provided with git branch name is used as prototyper build key)
+      is_expanded: true
+      is_required: false
+  - meta:
+    opts:
+      title: "Meta Message"
+      summery: Custom Message. E.g. commit hash.
+      is_expanded: true
+      is_required: false
+  - upload_key:
+    opts:
+      title: "Prototyper Upload Key"
+      summery: Upload Key which has to be generated in Prototyper.
+      is_expanded: true
+      is_required: true
+      is_sensitive: true
+  - ipa_path: $BITRISE_IPA_PATH
+    opts:
+      title: "IPA path"
+      summary: Path to your file you want to upload to Prototyper.
+      description: |
+        Enter the path to the file which should be uploaded to Prototyper.
+      is_expanded: true
+      is_required: true
+
+outputs:
+  - PROTOTYPER_BUILD_KEY:
+    opts:
+      title: "Prototype Build Key"
+      summary: Used Prototyper Build Key.
