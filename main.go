@@ -99,10 +99,17 @@ func main() {
 			os.Exit(1)
 		}
 		resp.Body.Close()
-		
-		fmt.Println("Request completed successfully!")
+
 		fmt.Println("Status Code: ", resp.StatusCode)
 		fmt.Println("Body:", body)
+		
+
+		if resp.StatusCode != 200 {
+			fmt.Printf("Request didn't complete successfully - StatusCode != 200")
+			os.Exit(1)
+		} else {
+			fmt.Println("Request completed successfully!")
+		}
 	}
 
 	// --- Step Outputs: Export Environment Variables for other Steps:
