@@ -63,7 +63,7 @@ func main() {
 
 	if len(git_branch_name) > 0 && len(git_commit_hash) > 0 {
 		fmt.Println("Creating build key out of git_branch_name & git_commit_hash")
-		build_key = git_branch_name + "-" + git_commit_hash
+		build_key = git_branch_name + " - " + git_commit_hash
 		fmt.Println("Using created build_key: ", build_key)
 	}
 
