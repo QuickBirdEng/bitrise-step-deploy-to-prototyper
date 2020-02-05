@@ -71,7 +71,7 @@ inputs:
       summery: "Upload URL of your Prototyper Project."
       description: |
         Upload URL of your Prototyper Project.
-        Form: '<i>baseurl</i>:<i>port</i>/apps/<i>appID</i>/releases'
+        Form: '_baseurl_:_port_/apps/_appID_/releases'
       is_expanded: true
       is_required: true
   - project_type: Beta
@@ -101,13 +101,13 @@ inputs:
         Should be accessable through "$BITRISE_GIT_BRANCH"
       is_expanded: true
       is_required: false
-  - git_commit_hash: $BITRISE_GIT_COMMIT
+  - git_commit_hash: $GIT_CLONE_COMMIT_HASH
     opts:
       title: "Git Commit Hash"
       summery: "Current git commit hash (if provided with git branch name is used as prototyper build key)"
       description: |
         Current git commit hash (if provided with git branch name is used as prototyper build key)
-        Should be accessable through "$BITRISE_GIT_COMMIT"
+        Should be accessable through $GIT\_CLONE\_COMMIT\_HASH which is an output of the git-clone step
       is_expanded: true
       is_required: false
   - meta:

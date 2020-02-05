@@ -63,7 +63,7 @@ func main() {
 
 	if len(git_branch_name) > 0 && len(git_commit_hash) > 0 {
 		fmt.Println("Creating build key out of git_branch_name & git_commit_hash")
-		build_key = git_branch_name + "-" + git_commit_hash
+		build_key = git_branch_name + " - " + git_commit_hash[:7]
 		fmt.Println("Using created build_key: ", build_key)
 	}
 
@@ -99,10 +99,16 @@ func main() {
 			os.Exit(1)
 		}
 		resp.Body.Close()
-		
-		fmt.Println("Request completed successfully!")
+
 		fmt.Println("Status Code: ", resp.StatusCode)
 		fmt.Println("Body:", body)
+
+		if resp.StatusCode != 200 {
+			fmt.Printf("Request didn't complete successfully - StatusCode != 200")
+			os.Exit(1)
+		} else {
+			fmt.Println("Request completed successfully!")
+		}
 	}
 
 	// --- Step Outputs: Export Environment Variables for other Steps:
