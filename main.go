@@ -102,7 +102,6 @@ func main() {
 
 		fmt.Println("Status Code: ", resp.StatusCode)
 		fmt.Println("Body:", body)
-		
 
 		if resp.StatusCode != 200 {
 			fmt.Printf("Request didn't complete successfully - StatusCode != 200")
