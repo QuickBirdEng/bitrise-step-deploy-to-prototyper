@@ -30,4 +30,4 @@ jobs:
 
     # Runs a set of commands using the runners shell
     - name: Test Step
-      run: bitrise run test
+      run: ./bitrise run test
