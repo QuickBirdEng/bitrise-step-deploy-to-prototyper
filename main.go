@@ -70,13 +70,12 @@ func main() {
 	fmt.Println("Creating Request ...")
 
 	extraParams := map[string]string{
-		"beta[type]":			project_type,
-		"beta[build_key]":		build_key,
-		"beta[meta]":			meta,
+		"release[build_key]":	build_key,
+		"release[meta]":		meta,
 		"upload_key":			upload_key,
 	}
 
-	request, err := newfileUploadRequest(upload_url, extraParams, "beta[build]", ipa_path)
+	request, err := newfileUploadRequest(upload_url, extraParams, "release[build]", ipa_path)
 	if err != nil {
 		fmt.Printf("Failed to create Upload Request: ", err)
 		os.Exit(1)
