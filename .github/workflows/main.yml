@@ -22,12 +22,11 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    # Runs a single command using the runners shell
-    - name: Install bitrise cli
+    # Runs a set of commands using the runners shell
+    - name: Install bitrise cli & Run Test
       run: |
         curl -fL https://github.com/bitrise-io/bitrise/releases/download/1.39.1/bitrise-$(uname -s)-$(uname -m) > ./bitrise
         chmod +x ./bitrise
-
-    # Runs a set of commands using the runners shell
-    - name: Test Step
-      run: ./bitrise run test
+        export PATH="$(pwd):$PATH"
+        bitrise run test
+  
