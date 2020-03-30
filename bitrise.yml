@@ -40,7 +40,7 @@ workflows:
         - upload_url: https://apps.quickbirdstudios.com/apps/10/releases/
         - build_key: test
         - git_branch_name: master
-        - git_commit_hash: automatedbitrisetest
+        - git_commit_hash: 8c411a89ed6d846f064ed0decdba3a857f0d1667
         - meta: any meta info
         - ipa_path: ./test.ipa
         - upload_key: CTq16q37u9W7FZuaaJ
