@@ -61,16 +61,11 @@ func main() {
 	upload_key := os.Getenv("upload_key")
 	fmt.Println("'upload_key':", upload_key)
 
-	if len(git_branch_name) > 0 && len(git_commit_hash) > 0 {
-		fmt.Println("Creating build key out of git_branch_name & git_commit_hash")
-		build_key = git_branch_name + " - " + git_commit_hash[:7]
-		fmt.Println("Using created build_key: ", build_key)
-	}
-
 	fmt.Println("Creating Request ...")
 
 	extraParams := map[string]string{
-		"release[build_key]":	build_key,
+		"release[branch]":		git_branch_name,
+		"release[commit]":		git_commit_hash,
 		"release[meta]":		meta,
 		"upload_key":			upload_key,
 	}
